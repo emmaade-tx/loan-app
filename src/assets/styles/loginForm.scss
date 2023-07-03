@@ -1,0 +1,36 @@
+@import '@/assets/styles/variables.scss';
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: $color-white;
+
+    .login-left {
+        width: 50%;
+    }
+
+    .login-right {
+        width: 50%;
+    }
+
+    .login-form {
+        width: 100%;
+        max-width: 400px;
+        background-color: $color-white;
+    
+        // Add styles for form elements (labels, inputs, buttons, etc.)
+    }
+}
+
+
+  
+@media (min-width: $breakpoint-tablet) {
+    .login-container {
+      .login-form {
+        max-width: 600px;
+      }
+    }
+}
+  
