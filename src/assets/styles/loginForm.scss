@@ -9,6 +9,10 @@
 
     .login-left {
         width: 50%;
+
+        .pablo-sign-in {
+            object-fit: cover;
+        }
     }
 
     .login-right {
@@ -19,8 +23,54 @@
         width: 100%;
         max-width: 400px;
         background-color: $color-white;
+
+        @media (min-width: $breakpoint-desktop) {
+            max-width: 600px;
+        }
     
-        // Add styles for form elements (labels, inputs, buttons, etc.)
+        .login-title {
+            color: $color-primary;
+            font-size: 40px;
+            font-family: $font-family-avenir;
+            font-weight: $font-weight-bold;
+        }
+        .login-text {
+            color: $color-secondary;
+            font-size: 20px;
+            font-family: $font-family-avenir;
+            font-weight: $font-weight-light;
+        }
+        .forgot-password-text {
+            color: $color-default;
+            font-size: 12px;
+            font-family: $font-family-avenir;
+            font-weight: $font-weight-medium;
+        }
+        button {
+            background-color: $color-default;
+            border-radius: 8px;
+            width: 447px;
+            color: $color-white;
+            font-size: 14px;
+            text-align: center;
+            font-family: $font-family-avenir;
+            font-weight: $font-weight-medium;
+            outline: none;
+            cursor: pointer;
+            padding: 15px 20px;
+            border: none;
+        }
+        input {
+            width: 447px;
+            height: 50px;
+            background: $color-white;
+            border-radius: 5px;
+            border-left: 1px rgba(84, 95, 125, 0.15)solid;
+            border-top: 1px rgba(84, 95, 125, 0.15) solid;
+            border-right: 1px rgba(84, 95, 125, 0.15) solid;
+            border-bottom: 1px rgba(84, 95, 125, 0.15) solid;
+            margin-top: 15px;
+        }
     }
 }
 
