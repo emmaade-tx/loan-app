@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import SideNavbar from '@/components/SideNavbar';
 import TopBar from '@/components/TopBar';
+import MobileNav from '@/components/MobileNav';
 import '@/assets/styles/layout.scss';
 
 interface LayoutProps {
@@ -23,7 +24,8 @@ const Layout: React.FC<LayoutProps> = ({children}) => {
   return (
     <div className='layout-container'>
       <div className={collapsed ? "collapsed layout-main" : "layout-main"}>
-        <TopBar />
+        <TopBar toggleSidebar={toggleSidebar} />
+
         <SideNavbar 
             collapsed={collapsed} 
             onToggleCollapse={handleCollapse} 

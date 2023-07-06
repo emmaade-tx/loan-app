@@ -195,10 +195,7 @@ interface SideNavbarProps {
   ];
 
   return (
-    <div className="side-nav-container">
-	  <div className="side-nav-logo">
-        <Logo />
-	  </div>
+    <div className={`${collapsed ? "collapsed" : ""} ${isOpen ? "open" : ""} side-nav-container`}>
 	  <>
         <ul className="side-nav-menu-items">
           {navItems.map(item => (

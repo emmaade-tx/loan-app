@@ -4,9 +4,13 @@ import { ReactComponent as SearchIcon } from '@/assets/images/search-icon.svg';
 import { ReactComponent as BellIcon } from '@/assets/images/bell-icon.svg';
 import { ReactComponent as Avatar } from '@/assets/images/avatar.svg';
 import { ReactComponent as DropDownIcon } from '@/assets/images/dropdown-icon.svg';
-import { ReactComponent as MobileBurgerIcon } from '@/assets/images/burger-icon.svg';
+import MobileNav from "@/components/MobileNav";
+// import { ReactComponent as MobileBurgerIcon } from '@/assets/images/burger-icon.svg';
 
-const TopBar = () => {
+interface TopBarProps {
+  toggleSidebar: () => void
+}
+const TopBar: React.FC<TopBarProps> = ({toggleSidebar}) => {
     return (
       <div className="top-nav-container">
         <div>
@@ -28,7 +32,7 @@ const TopBar = () => {
               </div>
             </div>
             <div className="menu-icon">
-              <MobileBurgerIcon />
+              <MobileNav toggleSidebar={toggleSidebar} />
             </div>
           </div>
         </div>
