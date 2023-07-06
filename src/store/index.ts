@@ -8,7 +8,7 @@ export const storeUserData = async (user: User) => {
     },
   });
 
-  await db.put('users', user, user.email);
+  await db.put('users', user, user.id);
 }
 
 

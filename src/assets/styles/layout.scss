@@ -178,3 +178,17 @@
 		}
 	}
 }
+
+.mobile-nav-container {
+	align-items: center;
+    justify-content: space-between;
+    padding: 1.875rem 1.25rem 1rem;
+    background: var(--white);
+    display: none;
+	@media (min-width: $breakpoint-mobile) {
+		display: flex;
+	}
+    button {
+        max-height: 2.75rem;
+    }
+}

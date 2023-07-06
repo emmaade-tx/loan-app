@@ -9,7 +9,7 @@ import format from 'date-fns/format';
 import { User } from '@/types/user';
 import { getUser, storeUserData } from '@/store';
 import { capitalizeFirstChar } from '@/helper';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
   
 interface dataProps {
   data: User[];
@@ -91,8 +91,8 @@ const UsersTable: React.FC<dataProps> = ({ data: originalData }) => {
             </div>
             {selectedRow === row.index && (
               <div className="dropdown-content">
-                <a className="dropdown-item">View</a>
-                <a className="dropdown-item">Delete</a>
+                <Link to={`/dashboard/${row.id}`} className="dropdown-item">View</Link>
+                <Link to="#" className="dropdown-item">Delete</Link>
               </div>
             )}
           </div>
@@ -221,8 +221,9 @@ const UsersTable: React.FC<dataProps> = ({ data: originalData }) => {
   }
 
   const handleUserClick = async (row: User) => {
+    console.log(row)
     await storeUserData(row);
-    navigate(`/dsahsboard/user/${row.id}`)
+    navigate(`/dashboard/user/${row.id}`);
   }
   
   return (
@@ -230,7 +231,7 @@ const UsersTable: React.FC<dataProps> = ({ data: originalData }) => {
       <button className='toggle-btn' onClick={handleFilterButtonClick}>Toggle Filter</button>
       <table className='table' {...getTableProps()}>
         <thead>
-          {headerGroups.map(headerGroup => (
+          {headerGroups.map(headerGroup => (  
             <tr {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map(column => (
                 <th {...column.getHeaderProps(column.getSortByToggleProps())}>

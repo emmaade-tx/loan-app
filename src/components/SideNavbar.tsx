@@ -32,7 +32,6 @@ interface SideNavbarProps {
     isOpen: boolean;
     closeSidebar: () => void;
   }
-  
 
   const SideNavbar: React.FC<SideNavbarProps> = ({ collapsed, onToggleCollapse, isOpen, closeSidebar }) => {
   const navigate = useNavigate();
