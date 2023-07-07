@@ -14,11 +14,11 @@ const Dashboard: React.FC = () => {
         <div className='title'>Users</div>
         <CardAnalysis />
         {loading ? (
-            <div className='loader'></div>
+          <div className='loader'></div>
         ) : data ? (
-            <UsersTable data={data} />
+          <UsersTable data={data} />
         ): (
-            <div className='error'></div>
+          <div className='error'>Something went wrong</div>
         )}
       </div>
     </Layout>

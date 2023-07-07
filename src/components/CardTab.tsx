@@ -19,7 +19,7 @@ const CardTab: React.FC<UserProps> = ({user}) => {
             <ProfileIcon />
           )}
           <div className='info-name'>
-            <p>
+            <p id="profile-name">
               {`${user.profile?.firstName} ${user.profile?.lastName}`}
             </p>
             <span>{user.profile.bvn}</span>

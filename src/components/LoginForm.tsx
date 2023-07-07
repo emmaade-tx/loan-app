@@ -12,7 +12,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    
+
     // Start loading
     setLoading(true);
     
@@ -36,7 +36,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
       setLoading(false);
       return;
     }
-    
+
     // Simulate a network request delay
     setTimeout(() => {
       onSubmit(email, password);

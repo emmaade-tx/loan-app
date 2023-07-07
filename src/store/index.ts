@@ -21,6 +21,5 @@ export const getUser = async (id: string) => {
 
   const user = await db.get('users', id);
 
-  console.log(user);
   return user;
 }

@@ -1,4 +1,3 @@
-import { ReactComponent as Logo } from '@/assets/images/logo.svg';
 import { ReactComponent as SwitchOrgIcon } from '@/assets/images/switch-org-icon.svg';
 import { ReactComponent as DashboardIcon } from '@/assets/images/dashboard-icon.svg';
 import { ReactComponent as UserGroupIcon } from '@/assets/images/user-group-icon.svg';
@@ -26,17 +25,13 @@ import { ReactComponent as ChevronDownIcon } from '@/assets/images/chevron-down-
 import { ReactComponent as LogoutIcon } from '@/assets/images/logout-icon.svg';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
-interface SideNavbarProps {
-    collapsed: boolean;
-    onToggleCollapse: () => void;
+  interface SideNavbarProps {
     isOpen: boolean;
-    closeSidebar: () => void;
   }
 
-  const SideNavbar: React.FC<SideNavbarProps> = ({ collapsed, onToggleCollapse, isOpen, closeSidebar }) => {
+  const SideNavbar: React.FC<SideNavbarProps> = ({ isOpen }) => {
   const navigate = useNavigate();
   const location = useLocation();
-  console.log(collapsed, onToggleCollapse, isOpen, closeSidebar);
 
   const navItems = [
     {
@@ -195,7 +190,7 @@ interface SideNavbarProps {
   ];
 
   return (
-    <div className={`${collapsed ? "collapsed" : ""} ${isOpen ? "open" : ""} side-nav-container`}>
+    <div className={`${isOpen ? "open" : ""} side-nav-container`}>
 	  <>
         <ul className="side-nav-menu-items">
           {navItems.map(item => (

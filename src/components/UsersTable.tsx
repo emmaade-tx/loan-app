@@ -22,7 +22,6 @@ const UsersTable: React.FC<dataProps> = ({ data: originalData }) => {
   const [pageIndex, setPageIndex] = useState<number>(0);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const navigate = useNavigate();
-  console.log('page size: ', pageSize);
 
   const fetchData = async () => {
     for (let i = 0; i < data.length; i++) {
@@ -41,12 +40,12 @@ const UsersTable: React.FC<dataProps> = ({ data: originalData }) => {
   const columns: Array<Column<User>> = React.useMemo(() => [
     {
       Header: 'ORGANIZATION',
-      accessor: 'orgName',
+      accessor: 'organizationName',
       id: 'organization'
     },
     {
       Header: 'USERNAME',
-      accessor: 'userName',
+      accessor: 'username',
     },
     {
       Header: 'EMAIL',
@@ -61,7 +60,6 @@ const UsersTable: React.FC<dataProps> = ({ data: originalData }) => {
       accessor: 'createdAt',
       Cell: ({ cell: { value } }: { cell: { value: string } }) => {
         let formattedDate = "N/A";
-        console.log(value)
         if (value) {
           const parsedDate = new Date(value);
           formattedDate = format(parsedDate, "MMMM d, yyyy h:mm a");
@@ -108,7 +106,6 @@ const UsersTable: React.FC<dataProps> = ({ data: originalData }) => {
     page,
     canPreviousPage,
     canNextPage,
-    pageOptions,
     pageCount,
     gotoPage,
     nextPage,
@@ -199,8 +196,8 @@ const UsersTable: React.FC<dataProps> = ({ data: originalData }) => {
   
       // Filter based on the form inputs
       return (
-        (!organization || user.orgName.toLowerCase() === organization.toLowerCase()) &&
-        (!username || user.userName.toLowerCase().includes(username.toLowerCase())) &&
+        (!organization || user.organizationName.toLowerCase() === organization.toLowerCase()) &&
+        (!username || user.username.toLowerCase().includes(username.toLowerCase())) &&
         (!email || user.email.toLowerCase().includes(email.toLowerCase())) &&
         (!date || user.createdAt.toLowerCase().includes(date.toLowerCase())) &&
         (!phoneNumber || user.phoneNumber.includes(phoneNumber)) &&
@@ -210,7 +207,6 @@ const UsersTable: React.FC<dataProps> = ({ data: originalData }) => {
   
     // Update the table data with the filtered data
     // You can store the filtered data in state or use it directly
-    console.log(filteredData);
     setData(filteredData);
     handleFilterButtonClick();
   };
@@ -221,7 +217,6 @@ const UsersTable: React.FC<dataProps> = ({ data: originalData }) => {
   }
 
   const handleUserClick = async (row: User) => {
-    console.log(row)
     await storeUserData(row);
     navigate(`/dashboard/user/${row.id}`);
   }

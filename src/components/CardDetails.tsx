@@ -9,7 +9,7 @@ const CardDetails: React.FC<DetailsProp>  = ({user}) => {
     <div className='card-details'>
         <div className='container'>
           <div className="card-info">
-            <h2>Personal Information</h2>
+            <h2 id="titlePi">Personal Information</h2>
             <div className="card-info-details">
                 <div>
                     <p>FULL NAME</p>
@@ -17,7 +17,7 @@ const CardDetails: React.FC<DetailsProp>  = ({user}) => {
                 </div>
                 <div>
                     <p>Phone Number</p>
-                    <p>{user.profile.phoneNumber}</p>
+                    <p id="phoneNumber">{user.profile.phoneNumber}</p>
                 </div>
                 <div>
                     <p>Email Address</p>

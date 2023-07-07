@@ -1,11 +1,10 @@
-import React from 'react';
 import LoginForm from '@/components/LoginForm';
-import { ReactComponent as Logo } from '@/assets/images/logo.svg';
+import { ReactComponent as Logo } from '@/assets/images/logo.svg'; 
 import { ReactComponent as PabloSignIn } from '@/assets/images/pablo-sign-in.svg';
 import { useNavigate } from 'react-router-dom';
 import '@/assets/styles/loginForm.scss';
 
-const Login: React.FC = () => {
+const Login = () => {
   const navigate = useNavigate();
 
   const handleSubmit = (email: string, password: string) => {

@@ -13,15 +13,15 @@ const UserDetail = () => {
   useEffect(() => {
     async function fetchUser(id: string) {
         const resp = await getUser(id);
-         console.log(resp);
+
         setUser(resp);
     }
-    console.log(id);
+
     if (id) {
       fetchUser(id);
     }
   }, []);
-  console.log(user);
+
   return (
     <Layout>
       <div className='user-detail-container'>

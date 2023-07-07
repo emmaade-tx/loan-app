@@ -35,8 +35,8 @@ interface UserProfile {
   
   export interface User {
     createdAt: string;
-    orgName: string;
-    userName: string;
+    organizationName: string;
+    username: string;
     email: string;
     phoneNumber: string;
     lastActiveDate: string;
