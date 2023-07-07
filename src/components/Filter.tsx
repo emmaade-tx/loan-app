@@ -25,7 +25,7 @@ const Filter: React.FC<FilterProps> = ({ onSubmit, onReset }) => {
 	<form className="filter-form" method="post"  onSubmit={handleSubmit}>
 	  <div className="form-group">
         <label htmlFor="organization">Organization</label>
-        <select>
+        <select id="organization">
           <option value="">Select</option>
         </select>
 	  </div>
@@ -63,7 +63,7 @@ const Filter: React.FC<FilterProps> = ({ onSubmit, onReset }) => {
       </div>
 	  <div className="form-group">
         <label htmlFor="status">Status</label>
-        <select name="status">
+        <select id="status" name="status">
           <option value="">Select</option>
           <option value="pending">Pending</option>
           <option value="inactive">Inactive</option>

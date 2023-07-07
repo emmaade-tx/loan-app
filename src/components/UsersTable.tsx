@@ -5,9 +5,12 @@ import { ReactComponent as SortIcon } from '@/assets/images/filter-results-icon.
 import { ReactComponent as SettingsIcon } from '@/assets/images/settings-icon.svg';
 import { ReactComponent as NextIcon } from '@/assets/images/next-icon.svg';
 import { ReactComponent as PrevIcon } from '@/assets/images/prev-icon.svg';
+import { ReactComponent as ActivateIcon } from '@/assets/images/activate-icon.svg';
+import { ReactComponent as BlacklistIcon } from '@/assets/images/blacklist-icon.svg';
+import { ReactComponent as EyeIcon } from '@/assets/images/eye-icon.svg';
 import format from 'date-fns/format';
 import { User } from '@/types/user';
-import { getUser, storeUserData } from '@/store';
+import { getUser, storeUserData, updateStatus } from '@/store';
 import { capitalizeFirstChar } from '@/helper';
 import { Link, useNavigate } from 'react-router-dom';
   
@@ -24,14 +27,17 @@ const UsersTable: React.FC<dataProps> = ({ data: originalData }) => {
   const navigate = useNavigate();
 
   const fetchData = async () => {
-    for (let i = 0; i < data.length; i++) {
-        const email = data[i].email;
-        const user = await getUser(email);
-        if (user) {
-          data[i].status = user.status;
-        }
-    }
-  }
+    const updatedData = await Promise.all(data.map(async (user) => {
+      const fetchedUser = await getUser(user.id);
+      if (fetchedUser) {
+        return { ...user, status: fetchedUser.status };
+      }
+      return user;
+    }));
+  
+    setData(updatedData);
+  };
+  
     
   React.useEffect(() => {
     fetchData();
@@ -72,7 +78,7 @@ const UsersTable: React.FC<dataProps> = ({ data: originalData }) => {
       id: 'status',
       accessor: (row: User) => row.status ? row.status : 'pending',
       Cell: ({ cell: { value } }: { cell: { value: string } }) => {
-        return <React.Fragment><div className={`status ${value}`}>{capitalizeFirstChar(value)}</div></React.Fragment>;
+        return <React.Fragment><div className={`status ${value}`}><p>{capitalizeFirstChar(value)}</p></div></React.Fragment>;
       }
     },
     {
@@ -80,6 +86,7 @@ const UsersTable: React.FC<dataProps> = ({ data: originalData }) => {
         accessor: () => '',
         disableSortBy: true,
         Cell: ({ row }: { row: Row<User> }) => (
+          
           <div className="dropdown">
             <div
               className={`dropdown-icon ${selectedRow === row.index ? 'active' : ''}`}
@@ -89,8 +96,9 @@ const UsersTable: React.FC<dataProps> = ({ data: originalData }) => {
             </div>
             {selectedRow === row.index && (
               <div className="dropdown-content">
-                <Link to={`/dashboard/${row.id}`} className="dropdown-item">View</Link>
-                <Link to="#" className="dropdown-item">Delete</Link>
+                <Link to='#' onClick={() => handleUserClick(row.original)} className="dropdown-item"><EyeIcon /><span>View Details</span></Link>
+                <Link to="#" onClick={() => handleStatusUpdate(row.original.id, 'Blacklisted')} className="dropdown-item"><BlacklistIcon /><span>BlackList User</span></Link>
+                <Link to="#" onClick={() => handleStatusUpdate(row.original.id, 'Active')} className="dropdown-item"><ActivateIcon /><span>Activate User</span></Link>
               </div>
             )}
           </div>
@@ -185,6 +193,10 @@ const UsersTable: React.FC<dataProps> = ({ data: originalData }) => {
     return pageNumbers;
   };
 
+  const handleStatusUpdate = async (id: string | number, status: string) => {
+    updateStatus(id, status)
+  }
+
   const handleFilter = (formData: FormData) => {
     const filteredData = data.filter((user) => {
       const organization = formData.get('organization') as string;
@@ -256,9 +268,17 @@ const UsersTable: React.FC<dataProps> = ({ data: originalData }) => {
           {page.map((row: Row<User>) => {
             prepareRow(row);
             return (
-              <tr {...row.getRowProps()} onClick={() => handleUserClick(row.original)}>
-                {row.cells.map(cell => (
-                  <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+              <tr {...row.getRowProps()}>
+                {row.cells.map((cell, index) => (
+                  <td {...cell.getCellProps()} key={index}>
+                    {cell.column.id === 'organization' ? (
+                      <span onClick={() => handleUserClick(row.original)}>
+                        {cell.render('Cell')}
+                      </span>
+                    ) : (
+                      cell.render('Cell')
+                    )}
+                  </td>
                 ))}
               </tr>
             );

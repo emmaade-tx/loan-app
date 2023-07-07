@@ -1,6 +1,19 @@
 @import '@/assets/styles/variables.scss';
 
 .user-detail-container {
+    .back-link {
+        font-size: 16px;
+        color: $color-secondary;
+        text-decoration: none;
+        cursor: pointer;
+        display: flex;
+        gap: 15px;
+        margin-bottom: 25px;
+        span {
+            padding-top: 5px;
+        }
+
+    }
     header {
         display: flex;
         justify-content: space-between;
