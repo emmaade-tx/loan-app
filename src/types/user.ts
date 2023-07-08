@@ -15,6 +15,8 @@ interface Guarantor {
   phoneNumber: string;
   gender: string;
   address: string;
+  relationship: string;
+  email: string;
 }
 
 interface Socials {
@@ -44,6 +46,7 @@ export interface User {
   guarantor: Guarantor;
   accountBalance: string;
   accountNumber: string;
+  bank: string;
   socials: Socials;
   education: Education;
   id: string;

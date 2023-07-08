@@ -2,6 +2,6 @@
 import axios from 'axios';
 
 export const fetchUsers = async () => {
-  const response = await axios.get('https://64a72af6096b3f0fcc81219d.mockapi.io/api/v1/users');
+  const response = await axios.get('https://run.mocky.io/v3/ea7c1a09-7285-4ed9-806a-4377f015eac6');
   return response.data;
 };

@@ -70,7 +70,7 @@ const Filter: React.FC<FilterProps> = ({ onSubmit, onReset }) => {
           <option value="blacklisted">Blacklisted</option>
         </select>
 	  </div>
-	  <div>
+	  <div className="btn-group">
         <button onClick={handleReset} type="reset">Reset</button>
         <button type="submit">Filter</button>
 	  </div>

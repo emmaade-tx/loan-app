@@ -4,7 +4,22 @@ $color-default: #39CDCC;
 $color-white: #FFFFFF;
 $color-red: #E4033B;
 
+@font-face {
+    font-family: 'Avenir Next';
+    src: url('../fonts/avenir-next-regular.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Avenir Next Medium';
+    src: url('../fonts/avenir-next-medium.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Avenir Next Bold';
+    src: url('../fonts/avenir-next-bold.ttf') format('truetype');
+}
+
 $font-family-avenir: 'Avenir Next', sans-serif;
+$font-family-avenir-medium: 'Avenir Next Medium', sans-serif;
+$font-family-avenir-bold: 'Avenir Next Bold', sans-serif;
 $font-family-work-sans: 'Work Sans', sans-serif;
 
 $font-weight-light: 400;
@@ -14,5 +29,7 @@ $font-weight-bold: 700;
 
 $breakpoint-mobile: 480px;   // For mobile devices
 $breakpoint-tablet: 768px;   // For tablet devices
-$breakpoint-laptop: 1024px;  // For laptop devices
-$breakpoint-desktop: 1200px; // For desktops and large screens
+$breakpoint-tablet-large: 1024px;  // For laptop devices
+$breakpoint-laptop: 1280px; // For desktops
+$breakpoint-desktop: 1440px; // For larger screens
+$breakpoint-desktop-large: 1600px; // For larger screens

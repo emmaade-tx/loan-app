@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Filter from '@/components/Filter';
+import { toast } from 'react-toastify';
 import { useTable, usePagination, useSortBy, Row, Column } from 'react-table';
 import { ReactComponent as SortIcon } from '@/assets/images/filter-results-icon.svg';
 import { ReactComponent as SettingsIcon } from '@/assets/images/settings-icon.svg';
@@ -10,6 +11,7 @@ import { ReactComponent as BlacklistIcon } from '@/assets/images/blacklist-icon.
 import { ReactComponent as EyeIcon } from '@/assets/images/eye-icon.svg';
 import format from 'date-fns/format';
 import { User } from '@/types/user';
+
 import { getUser, storeUserData, updateStatus } from '@/store';
 import { capitalizeFirstChar } from '@/helper';
 import { Link, useNavigate } from 'react-router-dom';
@@ -194,7 +196,8 @@ const UsersTable: React.FC<dataProps> = ({ data: originalData }) => {
   };
 
   const handleStatusUpdate = async (id: string | number, status: string) => {
-    updateStatus(id, status)
+    updateStatus(id, status);
+    toast.success("Status updated");
   }
 
   const handleFilter = (formData: FormData) => {
@@ -234,86 +237,88 @@ const UsersTable: React.FC<dataProps> = ({ data: originalData }) => {
   }
   
   return (
-    <div className='table-container'>
+    <>
       <button className='toggle-btn' onClick={handleFilterButtonClick}>Toggle Filter</button>
-      <table className='table' {...getTableProps()}>
-        <thead>
-          {headerGroups.map(headerGroup => (  
-            <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map(column => (
-                <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                  {column.render('Header')}
-                  {column.id !== 'settings' && (
-                    <span>
-                      {column.isSorted ? (
-                        column.isSortedDesc ? (
-                            <SortIcon className='sort-icon desc' />
-                        ) : (
-                            <SortIcon className='sort-icon asc' />
-                        )
-                        ) : (
-                        <SortIcon className='sort-icon' />
-                      )}
-                    </span>
-                  )}
-                  {isFilterOpen && column.id === 'organization' && (
-                    <Filter onSubmit={handleFilter} onReset={handleReset} />
-                  )}
-                </th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody {...getTableBodyProps()}>
-          {page.map((row: Row<User>) => {
-            prepareRow(row);
-            return (
-              <tr {...row.getRowProps()}>
-                {row.cells.map((cell, index) => (
-                  <td {...cell.getCellProps()} key={index}>
-                    {cell.column.id === 'organization' ? (
-                      <span onClick={() => handleUserClick(row.original)}>
-                        {cell.render('Cell')}
+      <div className='table-container'>
+        <table className='table' {...getTableProps()}>
+          <thead>
+            {headerGroups.map(headerGroup => (  
+              <tr {...headerGroup.getHeaderGroupProps()}>
+                {headerGroup.headers.map(column => (
+                  <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                    {column.render('Header')}
+                    {column.id !== 'settings' && (
+                      <span>
+                        {column.isSorted ? (
+                          column.isSortedDesc ? (
+                              <SortIcon className='sort-icon desc' />
+                          ) : (
+                              <SortIcon className='sort-icon asc' />
+                          )
+                          ) : (
+                          <SortIcon className='sort-icon' />
+                        )}
                       </span>
-                    ) : (
-                      cell.render('Cell')
                     )}
-                  </td>
+                    {isFilterOpen && column.id === 'organization' && (
+                      <Filter onSubmit={handleFilter} onReset={handleReset} />
+                    )}
+                  </th>
                 ))}
               </tr>
-            );
-          })}
-        </tbody>
-      </table>
-      <div className="pagination">
-        <div className="pagination-left">
-          Showing {" "}
-          <select value={pageSize} onChange={handlePageSizeChange}>
-            <option value="10">10</option>
-            <option value="20">20</option>
-            <option value="30">30</option>
-            <option value="40">40</option>
-            <option value="50">50</option>
-          </select> {" "}
-          out of {data.length}
-        </div>
-        <div className="pagination-right">
-          <div
-            onClick={() => previousPage()}
-            className={`pagination-button ${canPreviousPage ? '' : 'disabled'}`}
-          >
-            <PrevIcon />
+            ))}
+          </thead>
+          <tbody {...getTableBodyProps()}>
+            {page.map((row: Row<User>) => {
+              prepareRow(row);
+              return (
+                <tr {...row.getRowProps()}>
+                  {row.cells.map((cell, index) => (
+                    <td {...cell.getCellProps()} key={index}>
+                      {cell.column.id === 'organization' ? (
+                        <span onClick={() => handleUserClick(row.original)}>
+                          {cell.render('Cell')}
+                        </span>
+                      ) : (
+                        cell.render('Cell')
+                      )}
+                    </td>
+                  ))}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+        <div className="pagination">
+          <div className="pagination-left">
+            Showing {" "}
+            <select value={pageSize} onChange={handlePageSizeChange}>
+              <option value="10">10</option>
+              <option value="20">20</option>
+              <option value="30">30</option>
+              <option value="40">40</option>
+              <option value="50">50</option>
+            </select> {" "}
+            out of {data.length}
           </div>
-          {renderPageNumbers()}
-          <div
-            onClick={() => nextPage()}
-            className={`pagination-button ${canNextPage ? '' : 'disabled'}`}
-          >
-            <NextIcon />
+          <div className="pagination-right">
+            <div
+              onClick={() => previousPage()}
+              className={`pagination-button ${canPreviousPage ? '' : 'disabled'}`}
+            >
+              <PrevIcon />
+            </div>
+            {renderPageNumbers()}
+            <div
+              onClick={() => nextPage()}
+              className={`pagination-button ${canNextPage ? '' : 'disabled'}`}
+            >
+              <NextIcon />
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

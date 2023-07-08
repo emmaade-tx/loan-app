@@ -2,54 +2,62 @@
 
 .login-container {
     display: flex;
-    justify-content: center;
     align-items: center;
-    height: 100vh;
+    width: 100%;
+    min-height: 100vh;
     background-color: $color-white;
-
+    position: relative;
+    .logo-wrapper {
+        position: absolute;
+        top: 70px;
+        left: 97px;
+    }
     .login-left {
-        width: 50%;
-
+        flex: 0.51;
+        padding: 0 61.33px 0 59.56px;
         .pablo-sign-in {
-            object-fit: cover;
+            width: 100%;
+            display: block;
+            height: auto;
         }
     }
-
     .login-right {
-        width: 50%;
+        flex: 0.49;
+        padding: 0 60px;
+        width: 100%;
     }
-
     .login-form {
         width: 100%;
-        max-width: 400px;
         background-color: $color-white;
-
-        @media (min-width: $breakpoint-desktop) {
-            max-width: 600px;
-        }
-    
-        .login-title {
-            color: $color-primary;
-            font-size: 40px;
-            font-family: $font-family-avenir;
-            font-weight: $font-weight-bold;
-        }
-        .login-text {
-            color: $color-secondary;
-            font-size: 20px;
-            font-family: $font-family-avenir;
-            font-weight: $font-weight-light;
+        .login-header {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            .login-title {
+                color: $color-primary;
+                font-size: 40px;
+                font-family: $font-family-avenir-bold;
+                font-weight: $font-weight-bold;
+            }
+            .login-text {
+                color: $color-secondary;
+                font-size: 20px;
+                font-family: $font-family-avenir;
+                font-weight: $font-weight-light;
+            }
         }
         .forgot-password-text {
             color: $color-default;
             font-size: 12px;
-            font-family: $font-family-avenir;
-            font-weight: $font-weight-medium;
+            font-family: $font-family-avenir-medium;
+            margin: 24px 0 30px;
         }
         button {
             background-color: $color-default;
             border-radius: 8px;
-            width: 447px;
+            width: 100%;
+            max-width: 447px;
+            max-width: 447px;
             color: $color-white;
             font-size: 14px;
             text-align: center;
@@ -61,26 +69,75 @@
             border: none;
         }
         input {
-            width: 447px;
+            width: 100%;
+            max-width: 447px;
             height: 50px;
             background: $color-white;
             border-radius: 5px;
-            border-left: 1px rgba(84, 95, 125, 0.15)solid;
-            border-top: 1px rgba(84, 95, 125, 0.15) solid;
-            border-right: 1px rgba(84, 95, 125, 0.15) solid;
-            border-bottom: 1px rgba(84, 95, 125, 0.15) solid;
+            box-shadow: 0px 0px 0px 2px rgba(84, 95, 125, 0.15) inset;
+            background-color: white;
+            font-family: "Avenir Next", sans-serif;
+            border: none;
+            outline: none;
+            margin: 0;
             margin-top: 15px;
+            color: #545F7D;
+            display: flex;
+            align-items: center;
+            padding-left: 16px;
+            font-size: 14px;
+            &::input-placeholder {
+                opacity: 0.6;
+                font-family: inherit;
+            }
         }
     }
-}
-
-
-  
-@media (min-width: $breakpoint-tablet) {
-    .login-container {
-      .login-form {
-        max-width: 600px;
-      }
+    
+    @media (min-width: $breakpoint-desktop-large) {
+        justify-content: center;
+        .login-left {
+            text-align: center;
+        }
+    }
+    @media (min-width: $breakpoint-desktop) {
+        .logo-wrapper {
+            top: 100px;
+        }
+        .login-left {
+            padding: 0 69px 0 67px;
+        }
+        .login-right {
+            padding: 0 100px;
+            width: auto;
+        }
+    }
+    @media (max-width: $breakpoint-tablet) {
+        flex-direction: column;
+        gap: 24px;
+        .login-left {
+            padding: 0 48px;
+            .pablo-sign-in {
+                width: 100%;
+                height: auto;
+            }
+        }
+        .login-right {
+            padding: 0 48px 64px;
+            width: 100%;
+        }
+        .logo-wrapper {
+            padding: 64px 64px 0;
+            position: relative;
+            top: 0;
+            left: 0;
+            width: 100%;
+            text-align: center;
+        }
+        .login-form {
+            input, button {
+                max-width: 100%;
+            }
+        }
     }
 }
   

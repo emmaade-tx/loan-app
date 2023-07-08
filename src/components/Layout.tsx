@@ -16,16 +16,13 @@ const Layout: React.FC<LayoutProps> = ({children}) => {
 
   return (
     <div className='layout-container'>
-      <div className="layout-main">
-        <TopBar toggleSidebar={toggleSidebar} />
-
+      <TopBar toggleSidebar={toggleSidebar} />
+      <div className="children-container">
         <SideNavbar 
-            isOpen={isSidebarOpen} 
+          isOpen={isSidebarOpen} 
         />
-        <div className="children-container">
-          <div className='children-main'>
-            {children}
-          </div>
+        <div className='children-main'>
+          {children}
         </div>
       </div>
     </div>

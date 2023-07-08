@@ -6,8 +6,7 @@ import UsersTable from '@/components/UsersTable';
 import '@/assets/styles/dashboard.scss'; 
 
 const Dashboard: React.FC = () => {
-  const { loading, data, error } = useFetchUsers();
-  console.log(loading, data, error);
+  const { loading, data } = useFetchUsers();
   return (
     <Layout>
       <div className='dahboard-container'>

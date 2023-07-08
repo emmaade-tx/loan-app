@@ -40,7 +40,7 @@ const CardTab: React.FC<UserProps> = ({user}) => {
           </div>
           <div className='account'>
             <p className='acct-bal'>₦{user.accountBalance}</p>
-            <p className='acct-number'>{`${user.accountNumber}/Providus Bank`}</p>
+            <p className='acct-number'>{`${user.accountNumber}/${user.bank}`}</p>
           </div>
         </div>
         <div className='tabs'>
