@@ -1,6 +1,3 @@
-
-# LENDSQR FRONTEND ENGINEERING ASSESSMENT
-
 ## Table of Contents
 
 -   [About Lendsqr](https://github.com/ademola-raimi/lendsqr-fe-test#about-lendsqr)
